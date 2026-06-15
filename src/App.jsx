@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navbar } from './components/Navbar/Navbar'
-import { HomePage } from './pages/HomePage';
-import { ShopPage } from './pages/ShopPage';
-import { CartPage } from './pages/CartPage';
+import Navbar from './components/Navbar/Navbar'
+import HomePage from './pages/HomePage';
+import ShopPage from './pages/ShopPage';
+import CartPage from './pages/CartPage';
 import './styles/App.css';
 
 // setup router to be passed down to all children pages
   function Layout() {
     return (
       <>
-        <Navbar />
+        <Navbar cartCount={0}/>
         <Outlet />
       </>
     );
@@ -31,8 +31,7 @@ const router = createBrowserRouter([
 
 function App() {
 
-  return 
-      <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App
