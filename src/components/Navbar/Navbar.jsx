@@ -7,9 +7,8 @@ import './Navbar.css';
 function Navbar({ cartCount }) {
     return (
         <nav>
-            <h1>Shop</h1>
+            <h1><Link to='/'>Home</Link></h1>
             <ul>
-                <li><Link to='/'>Home</Link></li>
                 <li><Link to='/shop'>Shop</Link> </li>
                 <li><Link to='/cart'>Cart ({cartCount})</Link></li>
             </ul>
