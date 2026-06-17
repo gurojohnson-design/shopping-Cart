@@ -5,52 +5,60 @@ import ShopPage from './pages/ShopPage';
 import CartPage from './pages/CartPage';
 import './styles/App.css';
 import { useState, useCallback } from 'react';
+import { element } from 'prop-types';
 
-function App() {
-// setup router to be passed down to all children pages
-  function Layout() {
-    return (
-      <>
-        <Navbar cartCount={cart.reduce((total, item) => total + item.quantity, 0)}/>
-        <Outlet />
-      </>
-    );
-  }
+// need to refactor pretty heavily to get navbar to not refresh webpage when items are added to cart
 
 
-// track cart state and handle adding items to cart
-  const [cart, setCart] = useState([]);
+// pull layout and router out of App() to stop multiple mountings
+function Layout({ cart, addToCart}) {
+  const cartCount = cart.reducce((total, item ) => total + item.quantity, 0);
+  
+  return (
+    <>
+      <Navbar cartCount={cartCount} />
+      <Outlet context={{ addToCart }} />
+    </>
+  );
+}
 
-  // refactored with useCallback to make it through rerenders
-  const addToCart = useCallback((id, quantity) => {
-    if (quantity <= 0) return;
-    
-    if (cart.some(obj => obj.id === id)) {
-      setCart(cart.map(item => 
-        item.id === id? {...item, quantity: item.quantity + quantity}
-        : item
-      ));
-    } else {
-      setCart([...cart, {id, quantity}]);
-    }
-  }, [cart]);
-
-// pass addToCart down to the shop page
-// refactored with useMemo to persist through rerenders
-const router = useMemo(() => createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <LayoutWrapper />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: 'shop', element: <ShopPage onAddToCart={addToCart} /> },
-      { path: 'cart', element: <CartPage /> },
+      { path: 'shop', element: <ShopPage /> },
+      { path: 'cart', element: <CartPage />},
     ],
   },
-]), [addToCart]);
+]);
 
+// wrap Layout to pass down comps i need
+function LayoutWrapper() {
+  const [cart, setCart] = useState([]);
 
-  return <RouterProvider router={router} />
+  const addToCart = useCallback((id, quantity) => {
+    if (quantity <= 0) return;
+    setCart(prev => {
+      if (prev.some(obj => obj.id === id)) {
+        return prev.map(item =>
+          item.id === id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+      }
+      return [...prev, { id, quantity }];
+    });
+  }, []);
+
+  return <Layout cart={cart} addToCart={addToCart} />;
 }
+
+function App() {
+  
+  return <RouterProvider router={router} />;
+
+}
+
+
 
 export default App
