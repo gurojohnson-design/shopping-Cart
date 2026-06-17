@@ -6,11 +6,9 @@ import { useState } from "react";
 
 // need to write a card that displays info and receives the above from the ShopPage as props. in addition to the info need to have a increment/decrement button for quantity and a 'add to cart' button
 
-// more on this later
-
 // will receive array of product objects with above data and need to return display for all those things
 
-function ProductCard(pic, name, price, id, description) {
+function ProductCard({pic, name, price, id, description}) {
     //track state of increment and decrement buttons
     const [quantity, setQuantity] = useState(0);
 
@@ -28,28 +26,28 @@ function ProductCard(pic, name, price, id, description) {
         <div>
             <img 
             src={pic}
-            alt={description} >product pic goes here</img>
+            alt={name} />
             <h3>{name}</h3>
             <p>{price}</p>
             <button
-                onClick={handleChange(false)}
+                onClick={() => handleChange(false)}
                 >-</button>
             <input
                 type="number"
                 value={quantity}
-                onChange={handleChange}
+                onChange={(e) => setQuantity(Number(e.target.value))}
                 min={0}
                 step={1}
                 pattern="[0-9]*"
                 placeholder="" 
                 />
             <button
-                onClick={handleChange(true)}
+                onClick={() => handleChange(true)}
             >
                 +
             </button>
                 <button
-                    onClick={sendToCart({quantity})}
+                    onClick={() => sendToCart(quantity)}
                 >Add to cart</button>
         </div>
     )
