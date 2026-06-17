@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx/ProductCard";
+import { useOutletContext } from "react-router-dom";
 
-function ShopPage({onAddToCart}) {
+
+const { addToCart } = useOutletContext();
+
+
+function ShopPage() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -29,7 +34,7 @@ function ShopPage({onAddToCart}) {
             <ul>
                 {products.map((product) => (
 
-                    <ProductCard key={product.id} pic={product.image} name={product.title} price={product.price} id={product.id} description={product.description} onAddToCart={onAddToCart} />
+                    <ProductCard key={product.id} pic={product.image} name={product.title} price={product.price} id={product.id} description={product.description} addToCart={addToCart} />
                 ))}
             </ul>
 

@@ -8,7 +8,7 @@ import { useState } from "react";
 
 // will receive array of product objects with above data and need to return display for all those things
 
-function ProductCard({pic, name, price, id, description, onAddToCart}) {
+function ProductCard({pic, name, price, id, description, addToCart}) {
     //track state of increment and decrement buttons
     const [quantity, setQuantity] = useState(0);
 
@@ -42,7 +42,7 @@ function ProductCard({pic, name, price, id, description, onAddToCart}) {
                 +
             </button>
                 <button
-                    onClick={() => onAddToCart(id, quantity)}
+                    onClick={() => addToCart(id, quantity)}
                 >Add to cart</button>
         </div>
     )
