@@ -3,10 +3,10 @@ import ProductCard from "../components/ProductCard.jsx/ProductCard";
 import { useOutletContext } from "react-router-dom";
 
 
-const { addToCart } = useOutletContext();
 
 
 function ShopPage() {
+    const { addToCart } = useOutletContext();
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);

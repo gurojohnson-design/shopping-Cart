@@ -12,7 +12,7 @@ import { element } from 'prop-types';
 
 // pull layout and router out of App() to stop multiple mountings
 function Layout({ cart, addToCart}) {
-  const cartCount = cart.reducce((total, item ) => total + item.quantity, 0);
+  const cartCount = cart.reduce((total, item ) => total + item.quantity, 0);
   
   return (
     <>
