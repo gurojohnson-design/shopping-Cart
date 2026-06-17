@@ -6,31 +6,20 @@ import CartPage from './pages/CartPage';
 import './styles/App.css';
 import { useState } from 'react';
 
+
+function App() {
 // setup router to be passed down to all children pages
   function Layout() {
     return (
       <>
-        <Navbar cartCount={0}/>
+        <Navbar cartCount={cart.length}/>
         <Outlet />
       </>
     );
   }
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'shop', element: <ShopPage /> },
-      { path: 'cart', element: <CartPage /> },
-    ],
-  },
-]);
 
-
-
-function App() {
+// track cart state and handle adding items to cart
   const [cart, setCart] = useState([]);
 
   function addToCart(id, quantity) {
@@ -46,9 +35,21 @@ function App() {
     }
   }
 
+// pass addToCart down to the shop page
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'shop', element: <ShopPage onAddToCart={addToCart} /> },
+      { path: 'cart', element: <CartPage /> },
+    ],
+  },
+]);
 
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
 export default App
