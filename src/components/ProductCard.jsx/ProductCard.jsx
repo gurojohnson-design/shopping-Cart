@@ -8,18 +8,12 @@ import { useState } from "react";
 
 // will receive array of product objects with above data and need to return display for all those things
 
-function ProductCard({pic, name, price, id, description}) {
+function ProductCard({pic, name, price, id, description, onAddToCart}) {
     //track state of increment and decrement buttons
     const [quantity, setQuantity] = useState(0);
 
     function handleChange(step) {
         step ? setQuantity(quantity + 1) : setQuantity(quantity - 1);
-    }
-
-    function sendToCart(num) {
-        if (num > 0) {
-            return num
-        }
     }
 
     return (
@@ -37,7 +31,7 @@ function ProductCard({pic, name, price, id, description}) {
                 id={id}
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                min={0}
+                min={1}
                 step={1}
                 pattern="[0-9]*"
                 placeholder="1" 
@@ -48,7 +42,7 @@ function ProductCard({pic, name, price, id, description}) {
                 +
             </button>
                 <button
-                    onClick={() => sendToCart(quantity)}
+                    onClick={() => onAddToCart(id, quantity)}
                 >Add to cart</button>
         </div>
     )

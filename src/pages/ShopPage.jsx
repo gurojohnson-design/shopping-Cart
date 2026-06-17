@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard.jsx/ProductCard";
 
-function ShopPage() {
+function ShopPage({onAddToCart}) {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -27,7 +28,8 @@ function ShopPage() {
         <div>
             <ul>
                 {products.map((product) => (
-                    <li key={product.id}>{product.title}</li>
+
+                    <ProductCard key={product.id} pic={product.image} name={product.title} price={product.price} id={product.id} description={product.description} onAddToCart={onAddToCart} />
                 ))}
             </ul>
 
