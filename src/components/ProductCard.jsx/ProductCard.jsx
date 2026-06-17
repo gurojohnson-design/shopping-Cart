@@ -34,12 +34,13 @@ function ProductCard({pic, name, price, id, description}) {
                 >-</button>
             <input
                 type="number"
+                id={id}
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 min={0}
                 step={1}
                 pattern="[0-9]*"
-                placeholder="" 
+                placeholder="1" 
                 />
             <button
                 onClick={() => handleChange(true)}
