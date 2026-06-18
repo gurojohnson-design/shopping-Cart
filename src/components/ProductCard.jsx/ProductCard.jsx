@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import PropTypes from "prop-types";
 
 
 // id, title, price, description, category, img
@@ -48,5 +48,15 @@ function ProductCard({pic, name, price, id, description, addToCart}) {
     )
 
 }
+
+ProductCard.PropTypes = {
+    pic: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    addToCart: PropTypes.func.isRequired,
+};
+
 
 export default ProductCard;

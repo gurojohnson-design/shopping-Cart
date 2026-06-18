@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 
 function CartItem({ item, updateQuantity }) {
@@ -35,4 +36,16 @@ function CartItem({ item, updateQuantity }) {
             )
         }
 
+
+
+CartItem.PropTypes = {
+    item: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        pic: PropTypes.string.isRequired,
+        quantity: PropTypes.number.isRequired,
+    }).isRequired,    
+    updateQuantity: PropTypes.func.isRequired,
+};
 export default CartItem;
