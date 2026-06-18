@@ -39,7 +39,26 @@
   transform: translateY(-2px);
 }
 
-.home-page__social-placeholder {
-  color: #777777;
-  font-size: 0.9rem;
+.home-page__social-link {
+  display: inline-grid;
+  justify-self: center;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-muted);
+}
+
+.home-page__social-link:hover,
+.home-page__social-link:focus-visible {
+  border-color: var(--color-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.home-page__github-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
 }
