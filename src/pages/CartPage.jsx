@@ -1,5 +1,6 @@
 import { useOutletContext, Link } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
+import '../styles/cart-page.css';
 
 
 //updateQuantity, cart
@@ -11,15 +12,15 @@ function CartPage() {
 
     if(cart.length === 0) {
         return (
-            <>
-            <h2>Nothing to see here.</h2>
-            <p><Link to='/shop' >Get shopping!</Link></p>
-            </>
+            <div className="cart-page cart-page--empty" id="cart-page">
+            <h2 className="cart-page__heading">Nothing to see here.</h2>
+            <p className="cart-page__empty-copy"><Link className="cart-page__shop-link" to='/shop' >Get shopping!</Link></p>
+            </div>
         )
     } else {
         return (
-            <div>
-                <ul>
+            <div className="cart-page" id="cart-page">
+                <ul className="cart-page__items" id="cart-items">
                     {cart.map((product) => (
                         <CartItem key={product.id} item={product} updateQuantity={updateQuantity} />
                     ))}

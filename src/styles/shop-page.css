@@ -1,0 +1,30 @@
+.shop-page,
+.shop-page__status {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.shop-page {
+  padding: clamp(32px, 6vw, 72px) 0;
+}
+
+.shop-page__products {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.shop-page__status {
+  padding: clamp(48px, 9vw, 96px) 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shop-page__footer-note {
+  margin-top: 28px;
+  color: #777777;
+  font-size: 0.9rem;
+  text-align: center;
+}

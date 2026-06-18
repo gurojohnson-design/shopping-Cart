@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import './ProductCard.css';
 
 
 // id, title, price, description, category, img
@@ -8,7 +9,7 @@ import PropTypes from "prop-types";
 
 // will receive array of product objects with above data and need to return display for all those things
 
-function ProductCard({pic, name, price, id, description, addToCart}) {
+function ProductCard({pic, name, price, id, addToCart}) {
     //track state of increment and decrement buttons
     const [quantity, setQuantity] = useState(0);
 
@@ -17,16 +18,23 @@ function ProductCard({pic, name, price, id, description, addToCart}) {
     }
 
     return (
-        <div>
+        <div className="product-card" id={`product-${id}`}>
             <img 
+            className="product-card__image"
             src={pic}
             alt={name} />
-            <h3>{name}</h3>
-            <p>{price}</p>
+            <div className="product-card__content">
+            <h3 className="product-card__title">{name}</h3>
+            <p className="product-card__price">{price}</p>
+            </div>
+            <div className="product-card__actions">
+            <div className="product-card__quantity">
             <button
+                className="product-card__quantity-button"
                 onClick={() => handleChange(false)}
                 >-</button>
             <input
+                className="product-card__quantity-input"
                 type="number"
                 id={id}
                 value={quantity}
@@ -37,13 +45,17 @@ function ProductCard({pic, name, price, id, description, addToCart}) {
                 placeholder="1" 
                 />
             <button
+                className="product-card__quantity-button"
                 onClick={() => handleChange(true)}
             >
                 +
             </button>
+            </div>
                 <button
+                    className="product-card__add-button"
                     onClick={() => addToCart(id, quantity, { name, price, pic })}
                 >Add to cart</button>
+            </div>
         </div>
     )
 
@@ -54,7 +66,6 @@ ProductCard.PropTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
     addToCart: PropTypes.func.isRequired,
 };
 

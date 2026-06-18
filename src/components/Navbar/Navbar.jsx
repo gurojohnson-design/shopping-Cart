@@ -6,11 +6,15 @@ import './Navbar.css';
 
 function Navbar({ cartCount }) {
     return (
-        <nav>
-            <h1><Link to='/'>Home</Link></h1>
-            <ul>
-                <li><Link to='/shop'>Shop</Link> </li>
-                <li><Link to='/cart'>Cart ({cartCount})</Link></li>
+        <nav className="navbar" id="site-navbar">
+            <h1 className="navbar__brand"><Link className="navbar__brand-link" to='/'>Home</Link></h1>
+            <ul className="navbar__links" id="primary-navigation">
+                <li className="navbar__item"><Link className="navbar__link" to='/shop'>Shop</Link> </li>
+                <li className="navbar__item">
+                    <Link className="navbar__link navbar__cart-link" to='/cart'>
+                        Cart <span className="navbar__cart-count" id="cart-count">{cartCount}</span>
+                    </Link>
+                </li>
             </ul>
         </nav>
     );

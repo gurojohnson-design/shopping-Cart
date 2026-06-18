@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx/ProductCard";
 import { useOutletContext } from "react-router-dom";
+import '../styles/shop-page.css';
 
 
 
@@ -24,23 +25,22 @@ function ShopPage() {
         .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>A network error was encountered</p>;
+    if (loading) return <p className="shop-page__status" id="shop-loading">Loading...</p>
+    if (error) return <p className="shop-page__status" id="shop-error">A network error was encountered</p>;
 
 
 
     return (
-        <div>
-            <ul>
+        <div className="shop-page" id="shop-page">
+            <ul className="shop-page__products" id="product-list">
                 {products.map((product) => (
 
-                    <ProductCard key={product.id} pic={product.image} name={product.title} price={product.price} id={product.id} description={product.description} addToCart={addToCart} />
+                    <ProductCard key={product.id} pic={product.image} name={product.title} price={product.price} id={product.id} addToCart={addToCart} />
                 ))}
             </ul>
 
 
-
-            <p>This is the shop page</p>
+            <p className="shop-page__footer-note">This is the shop page</p>
         </div>
     )
 }
