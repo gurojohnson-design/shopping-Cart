@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard.jsx/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import { useOutletContext } from "react-router-dom";
 import '../styles/shop-page.css';
 
