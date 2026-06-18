@@ -17,7 +17,7 @@ function Layout({ cart, addToCart}) {
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <Outlet context={{ addToCart }} />
+      <Outlet context={{ addToCart, updateQuantity, cart }} />
     </>
   );
 }
@@ -49,6 +49,19 @@ function LayoutWrapper() {
       return [...prev, { id, quantity }];
     });
   }, []);
+
+  const updateQuantity = useCallback((id, newQuantity) => {
+    if (newQuantity === 0) {
+      setCart(prev => prev.filter(item => item.id !== id))
+    } else {
+      setCart(prev =>
+      prev.map(item => item.id === id ? { ...item, quantity: newQuantity} : item)
+      )
+      
+    }
+  }, []);
+  
+    
 
   return <Layout cart={cart} addToCart={addToCart} />;
 }
