@@ -5,13 +5,12 @@ import ShopPage from './pages/ShopPage';
 import CartPage from './pages/CartPage';
 import './styles/App.css';
 import { useState, useCallback } from 'react';
-import { element } from 'prop-types';
 
 // need to refactor pretty heavily to get navbar to not refresh webpage when items are added to cart
 
 
 // pull layout and router out of App() to stop multiple mountings
-function Layout({ cart, addToCart}) {
+function Layout({ cart, addToCart, updateQuantity}) {
   const cartCount = cart.reduce((total, item ) => total + item.quantity, 0);
   
   return (
@@ -38,7 +37,7 @@ const router = createBrowserRouter([
 function LayoutWrapper() {
   const [cart, setCart] = useState([]);
 
-  const addToCart = useCallback((id, quantity) => {
+  const addToCart = useCallback((id, quantity, productInfo) => {
     if (quantity <= 0) return;
     setCart(prev => {
       if (prev.some(obj => obj.id === id)) {
@@ -46,7 +45,7 @@ function LayoutWrapper() {
           item.id === id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prev, { id, quantity }];
+      return [...prev, { ...productInfo, id, quantity }];
     });
   }, []);
 
@@ -63,7 +62,7 @@ function LayoutWrapper() {
   
     
 
-  return <Layout cart={cart} addToCart={addToCart} />;
+  return <Layout cart={cart} addToCart={addToCart} updateQuantity={updateQuantity} />;
 }
 
 function App() {

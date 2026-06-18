@@ -42,7 +42,7 @@ function ProductCard({pic, name, price, id, description, addToCart}) {
                 +
             </button>
                 <button
-                    onClick={() => addToCart(id, quantity)}
+                    onClick={() => addToCart(id, quantity, { name, price, pic })}
                 >Add to cart</button>
         </div>
     )
